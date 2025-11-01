@@ -1,0 +1,403 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Sign in - Google Accounts</title>
+    
+    <style>
+        /* START OF EMBEDDED CSS (based on provided file) */
+        body {
+            background-color: #f0f4f9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        #parent {
+            width: 75%;
+            max-width: 900px;
+            height: 400px;
+            background-color: white;
+            margin: 150px auto;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex; /* Desktop: Two columns */
+        }
+        .child {
+            width: 50%;
+            height: 100%;
+            box-sizing: border-box;
+            padding: 0 40px; 
+            /* Added padding for content alignment */
+        }
+        #google_logo_text {
+            font-size: 30px;
+            font-weight: bold;
+            color: #4285f4; 
+            margin-top: 40px;
+            display: block;
+        }
+        #signin_heading {
+            font-size: 40px;
+            font-weight: normal;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+        #statement {
+            font-size: 16px;
+            margin-top: 0;
+            color: #5f6368;
+        }
+        /* ADDED CSS for the User Email Chip */
+        #user_display_chip {
+            display: inline-flex; /* Use flex for icon and text */
+            align-items: center;
+            padding: 8px 12px 8px 8px; /* Padding for the "chip" effect */
+            border: 1px solid #dadce0;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #202124;
+            margin-top: 20px; /* Space below Welcome/Sign in heading */
+            max-width: 100%;
+            cursor: pointer;
+        }
+        #user_display_chip:hover {
+            background-color: #f8f9fa;
+        }
+        #user_display_icon {
+            /* Mimics the default gray user icon */
+            width: 20px;
+            height: 20px;
+            background-color: #dadce0; 
+            border-radius: 50%;
+            margin-right: 8px;
+            flex-shrink: 0;
+        }
+        /* END OF ADDED CSS */
+
+        /* Adjusted fieldset/input styles for dual-step login simulation */
+        .step-content {
+            margin-top: 50px;
+            padding-right: 40px; 
+            /* Keep content centered in the child div */
+        }
+        fieldset {
+            width: 100%;
+            border-color: royalblue;
+            color: blue;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        input {
+            width: 100%;
+            height: 30px;
+            border: transparent;
+            outline: none;
+            font-size: 15px;
+        }
+        #left_para {
+            padding-top: 30px;
+            font-size: 14px;
+        }
+        #left_para2 {
+            margin-top: -15px;
+            color: #0b57d0;
+            font-size: 14px;
+        }
+        #forgot {
+            height: 30px;
+            border-radius: 8px;
+            margin-top: 5px;
+            border: transparent;
+            background-color: white;
+            color: #0b57d0;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        #forgot:hover {
+            background-color: rgb(230, 249, 255);
+        }
+        .button_div {
+            overflow: hidden; 
+            padding-top: 20px;
+            text-align: right;
+        }
+        #Create_button {
+            width: 120px;
+            height: 40px;
+            border-radius: 20px;
+            border: none;
+            background-color: white;
+            color: #0b57d0;
+            font-weight: bold;
+            float: left;
+            cursor: pointer;
+        }
+        #Create_button:hover {
+            background-color: rgb(230, 249, 255);
+        }
+        .next-button {
+            width: 75px;
+            height: 40px;
+            border-radius: 20px;
+            background-color: #0b57d0;
+            color: white;
+            outline: none;
+            border: none;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .next-button:hover {
+            background-color: darkblue;
+        }
+        /* Footer Styles */
+        #languages {
+            width: 200px;
+            height: 30px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin-top: 15px;
+            border-radius: 8px;
+            border: none;
+            background-color: #f0f4f9;
+            margin-left: 20px;
+        }
+        .three_button_division {
+            float: right;
+            margin-top: 15px;
+            margin-right: 20px;
+        }
+        .three_buttons {
+            border: none;
+            border-radius: 5px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f9;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .three_buttons:hover {
+            background-color: rgb(217, 217, 217);
+        }
+        /* Gophish Specific Classes */
+        .hidden {
+            display: none !important;
+        }
+        .gophish-pretext {
+            background-color: #fdd8d8;
+            border: 1px solid #d93025;
+            color: #d93025;
+            padding: 10px;
+            margin-top: 20px;
+            font-size: 11pt;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        /* --- MOBILE RESPONSIVENESS FIXES (CRITICAL) --- */
+        @media (max-width: 768px) {
+            body {
+                background-color: white; /* Mobile Google login often has a white background */
+            }
+            #parent {
+                width: 100%;
+                max-width: 100%;
+                height: auto; /* Allow height to adjust */
+                margin: 0; /* Remove top margin */
+                border-radius: 0; /* No border radius on mobile */
+                box-shadow: none; /* No box shadow on mobile */
+                display: block; /* Stack elements vertically */
+            }
+            .child {
+                width: 100%; /* Full width */
+                padding: 0 24px; /* Standard mobile padding */
+                height: auto;
+            }
+            #left_child {
+                padding-top: 20px; /* Add some space at the top */
+                padding-bottom: 20px;
+                text-align: center; /* Center logo and text */
+            }
+            #right_child {
+                 /* Add space below content before the footer */
+                 padding-bottom: 20px;
+            }
+            #google_logo_text {
+                margin-top: 0;
+            }
+            #signin_heading {
+                font-size: 24px; /* Smaller heading on mobile */
+                text-align: center;
+            }
+            #statement {
+                font-size: 14px;
+                text-align: center;
+            }
+            /* MOBILE: Center the user chip */
+            #user_display_chip {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .step-content {
+                margin-top: 20px;
+                padding-right: 0; /* Use child padding instead */
+            }
+            /* Move footer elements to the center */
+            #languages {
+                float: none;
+                margin: 15px auto;
+                display: block;
+            }
+            .three_button_division {
+                float: none;
+                text-align: center;
+                margin: 0 auto 20px auto;
+            }
+        }
+        /* END OF EMBEDDED CSS */
+    </style>
+
+</head>
+<body>
+    <div id="parent">
+        <div id="left_child" class="child">
+            <span id="google_logo_text"></span>
+            <h1 id="signin_heading">Sign in to Google</h1>
+            <p id="statement">Use your Google Account</p>
+
+            <div id="user_display_chip_container" class="hidden">
+                <div id="user_display_chip">
+                    <span id="user_display_icon"></span>
+                    <span id="user_display_email"></span>
+                </div>
+            </div>
+            </div>
+
+        <div id="right_child" class="child">
+            <form method="POST" id="login_form" action="">
+
+                <div id="email_step" class="step-content">
+                    <fieldset>
+                        <legend id="legend">Email or phone</legend>
+                        <input type="text" id="username_input" name="username" required="" autocomplete="username"/>
+                    </fieldset>
+                    
+                    <button type="button" id="forgot">Forgot email?</button>
+                    
+                    <p id="left_para">Not your computer? Use Guest mode to sign in privately.</p>
+                    <p id="left_para2">Learn more about using Guest mode</p>
+                    
+                    <div id="button_division" class="button_div">
+                        <button type="button" id="Create_button">Create account</button>
+                        <button type="button" class="next-button" id="next_button_email">Next</button>
+                    </div>
+                </div>
+
+                <div id="password_step" class="step-content hidden">
+                    
+                    <fieldset>
+                        <legend id="legend_pw">Enter your password</legend>
+                        <input type="password" id="password_input" autocomplete="current-password" required=""/>
+                    </fieldset>
+                    
+                    <button type="button" id="forgot">Forgot password?</button>
+                    
+                    <div id="button_division_pw" class="button_div">
+                        <button type="button" id="back_button_pw" class="next-button" style="background-color: white; color: #0b57d0; float: left;">Back</button>
+                        <button type="submit" class="next-button" id="next_button_pw">Next</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    
+    <select name="Languages" id="languages">
+        <option value="" class="option">English (United States)</option>
+        <option value="" class="option">English (United Kingdom)</option>
+        <option value="" class="option">Spanish</option>
+        <option value="" class="option">Italian</option>
+        <option value="" class="option">తెలుగు</option>
+    </select>
+    <div id="buttons_division" class="three_button_division">
+        <button id="Help" class="three_buttons">Help</button>
+        <button id="Privacy" class="three_buttons">Privacy</button>
+        <button id="Terms" class="three_buttons">Terms</button>
+    </div>
+
+    <script>
+        // Gophish Logic for Two-Step Sign-In Simulation
+        const emailStep = document.getElementById('email_step');
+        const passwordStep = document.getElementById('password_step');
+        const usernameInput = document.getElementById('username_input');
+        const passwordInput = document.getElementById('password_input');
+        const nextButtonEmail = document.getElementById('next_button_email');
+        const backButtonPw = document.getElementById('back_button_pw');
+        // UPDATED: New elements for the email chip
+        const userDisplayChipContainer = document.getElementById('user_display_chip_container');
+        const userDisplayEmail = document.getElementById('user_display_email');
+        // END UPDATED
+        const signinHeading = document.getElementById('signin_heading');
+        const statement = document.getElementById('statement');
+
+        // Handle Email Input Step (Clicking 'Next')
+        nextButtonEmail.addEventListener('click', (e) => {
+            // Prevent the button from submitting the form prematurely
+            e.preventDefault(); 
+            const username = usernameInput.value.trim();
+
+            if (username.length > 0 && username.includes('@')) {
+                // 1. Hide Email step
+                emailStep.classList.add('hidden');
+                
+                // 2. Show Password step
+                passwordStep.classList.remove('hidden');
+                
+                // 3. Update headers and show email chip
+                signinHeading.textContent = 'Welcome';
+                statement.classList.add('hidden'); // Hide the "Use your Google Account" statement
+                
+                userDisplayEmail.textContent = username;
+                userDisplayChipContainer.classList.remove('hidden'); // Show the email chip container
+
+                // 4. Focus on password field
+                passwordInput.focus();
+            } else {
+                // In a real Google page, this shows a subtle red warning, but we'll use a message box for simple feedback.
+                // NOTE: Using a custom modal/error UI is better than alert(), but using console.error here.
+                console.error('Please enter a valid email address.'); 
+                // You can add logic here to display a red border around the input.
+            }
+        });
+
+        backButtonPw.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            passwordStep.classList.add('hidden');
+            
+           
+            emailStep.classList.remove('hidden');
+            
+        
+            signinHeading.textContent = 'Sign in to Google'; // Reset heading
+            statement.classList.remove('hidden'); // Show statement
+            statement.textContent = 'Use your Google Account'; // Reset statement
+            userDisplayChipContainer.classList.add('hidden'); // Hide the email chip
+            
+         
+            passwordInput.value = '';
+            usernameInput.focus();
+        });
+
+        
+        document.getElementById('Create_button').addEventListener('click', (e) => e.preventDefault());
+        document.getElementById('forgot').addEventListener('click', (e) => e.preventDefault());
+        
+        // Note: The original file had a #forgot_pw event listener, but you don't have a button with that ID. 
+        // It's safer to use the one with the `id="forgot"` and just update the button's text/position.
+        // For simplicity and assuming you kept the ID `forgot` for the password step button:
+        const forgotButtons = document.querySelectorAll('#forgot, #forgot_pw');
+        forgotButtons.forEach(button => button.addEventListener('click', (e) => e.preventDefault()));
+    </script>
+
+</body></html>
