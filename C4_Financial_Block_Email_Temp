@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URGENT: Your Student Financial Account Access Has Been BLOCKED</title>
+    <style>
+        /* Basic styling to mimic a clean, plain-text email client view */
+        body { 
+            font-family: Arial, sans-serif; 
+            font-size: 11pt; 
+            color: #333333; 
+            line-height: 1.6; 
+            margin: 0; 
+            padding: 20; 
+        }
+        .container { 
+            max-width: 600px; 
+            margin: 0; 
+            padding: 30px; 
+            border-left: 5px solid #cc0000; /* Red border to signify alert */
+            background-color: #E89797; 
+        }
+        .alert { 
+            color: #cc0000; 
+            font-weight: bold; 
+            font-size: 14pt; 
+            margin-bottom: 15px; 
+        }
+        .action-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 15px;
+            background-color: #d9534f; /* A red color for urgency */
+            color: #ffffff !important; /* Force white text */
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        a { 
+            color: #007bff; 
+            text-decoration: underline; 
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <p class="alert">FINANCIAL BLOCK NOTIFICATION</p>
+
+    <p>Dear Student,</p>
+	
+    <p>Please be advised that your access to student services, including advising ,course registration and exam ticket, has been "BLOCKED" due to an unresolved pending balance with the Bursary Unit.</p>
+
+    <p>You need to verify your current fee status and ledger balance to restore access to your student services.</p>
+
+    <p>Please proceed to the <a href="{{.URL}}">info.uniten.edu.my</a> portal.</p>
+
+    <p>Best regards,</p>
+    <p>
+        Bursary Unit<br>
+        Finance Department, Universiti Tenaga Nasional
+    </p>
+
+    <img src="{{.Tracker}}" alt="" style="display: none; height: 1px; width: 1px;">
+</div>
+
+</body>
+</html>
