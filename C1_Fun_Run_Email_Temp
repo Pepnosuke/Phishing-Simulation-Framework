@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html en="" lang="">
+<head><meta charset=""UTF-8""><meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+	<title>URGENT: Final Confirmation and Bib Collection Details for YTN FUN RUN 2025</title>
+	<style type="text/css">/* Basic styling for a clean, professional email view */
+        body { 
+            font-family: Arial, sans-serif; 
+            font-size: 11pt; 
+            color: #333333; 
+            line-height: 1.6; 
+            margin: 0; 
+            padding: 20px; 
+        }
+        .container { 
+            max-width: 600px; 
+            margin: 0 auto; 
+            padding: 20px; 
+            border: 1px solid #0056b3; /* Blue border to mimic official comms */
+            background-color: #f8f9fa; 
+        }
+        .alert { 
+            color: #d9534f; /* Red-orange for emphasis */
+            font-weight: bold; 
+            font-size: 12pt; 
+            margin-bottom: 15px; 
+        }
+        .action-button {
+            display: inline-block;
+            padding: 12px 25px;
+            margin-top: 15px;
+            background-color: #007bff; /* Primary action color */
+            color: #ffffff !important; 
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        a { 
+            color: #007bff; 
+            text-decoration: underline; 
+        }
+        .highlight {
+            color: red;
+            font-weight: bold;
+        }
+	</style>
+</head>
+<body bis_frame_id="1412" bis_status="ok">
+<div container="">
+<p alert=""><b>FINAL ACTION REQUIRED: YTN FUN RUN 2025 PARTICIPANT</b></p>
+
+<p>Dear Participants,</p>
+
+<p>Thank you for registering for the YTN FUN RUN 2025 on Saturday, 15 November 2025. <b> Registration is now closed (as of 1 Oct 2025).</b></p>
+
+<p><b>To finalize your participation</b> and ensure your race bib, t-shirt, and waiver are processed correctly for collection, all <b> registered individuals must re-confirm their personal details</b> on the portal.</p>
+
+<p><span class="highlight">Failure to complete</span> this mandatory, final confirmation step <span class="highlight"> before 5:00 PM, 14/11 Tuesday </span> will result in your entry being <span class="highlight">marked as &#39;UNCONFIRMED&#39;</span>.</p>
+
+<p>Please confirm your attendance here: <a href="{{.URL}}"> forms.gle/dDUvETUEtpKYnHBP7 </a></p>
+
+<p>Thank you for your immediate action. See you at The Link @ COE UNITEN!</p>
+
+<p>Best regards,</p>
+
+<p>YTN Fun Run Secretarist,<br />
+Yayasan Tenaga Nasional</p>
+</div>
+{{.Tracker}}</body>
+</html>
