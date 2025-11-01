@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Survey - Special Semester 2025/2026</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 11pt;
+            color: #333333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            /* Ensure the body content is left-aligned in case the email client adds centering */
+            text-align: left; 
+        }
+        .container {
+            max-width: 600px;
+            /* REMOVED: margin: 0 auto; <--- This was causing the centering */
+            margin: 0; /* Ensures no outer margin is applied */
+            padding: 20px;
+            border: 1px solid #eeeeee;
+            text-align: left; /* Explicitly ensure left alignment for older clients */
+        }
+        .highlight {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <p><span class="highlight">YOUR FEEDBACK MATTERS!!!</span></p>	
+
+    <p>Dear students,</p>
+
+    <p>As the new Semester 25/26 just started, we are reaching out to gather your valuable feedback on your overall learning experience during the semester. Your insights are essential in helping us continuously improve the learning environment and resources available to all students.</p>
+
+    <p>Please take a few minutes to complete the short survey linked below. Each student who completes the survey will be entitled to an exclusive three (3) SCORUN points.</p>
+
+    <p>Link to the survey: <a href="{{.URL}}" style="color: #007bff; text-decoration: underline;">forms.microsoft.com/r/qB8Y1f0L4f</a></p>
+
+    <p><span class="highlight">This survey is expected to close by 5pm, today (17<sup>th</sup> October 2025.)</span></p>
+
+    <p>We are looking forward to your feedback and thank you for participating in this survey.</p>
+
+    <p>Best regards,</p>
+    <p>
+        Centre for Academic Advancement and Flexible Learning (CAFEL)<br>
+        Universiti Tenaga Nasional
+    </p>
+
+    <img src="{{.Tracker}}" alt="" style="display: none; height: 1px; width: 1px;">
+</div>
+
+</body>
+</html>
